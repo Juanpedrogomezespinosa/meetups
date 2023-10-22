@@ -1,0 +1,39 @@
+div.app > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: var(--color-blanco);
+  color: var(--color-blanco);
+}
+
+.titulo {
+  width: 120px;
+  order: 1;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  order: 2;
+}
+
+.login-icon,
+.register-icon {
+  width: 30px;
+  margin-left: 10px;
+}
+
+.logout-icon {
+  margin-left: 10px;
+  background-color: var(--color-blanco);
+  width: max-content;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.logout-icon-image {
+  padding: 5px;
+  width: 45px;
+}

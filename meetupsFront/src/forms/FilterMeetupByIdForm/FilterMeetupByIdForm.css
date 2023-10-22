@@ -1,0 +1,101 @@
+.filter-meetup-form-container {
+  display: inline-block;
+  align-items: center;
+  min-height: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 20px 0;
+  vertical-align: middle;
+
+  max-width: 100%;
+  width: 100%;
+}
+
+.meetups-list {
+  list-style: none;
+  color: black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 150px 1rem 1rem 1rem;
+  max-width: 100%;
+  flex-wrap: wrap;
+}
+
+/* Estilo para los campos de entrada de texto en FilterMeetupByIdForm */
+.filter-meetup-form-container input[type="number"] {
+  padding: 8px;
+  border: 1px solid var(--color-gris-oscuro);
+  background-color: var(--color-gris-claro);
+  color: var(--color-negro);
+  border-radius: 5px;
+  font-size: 16px;
+  vertical-align: middle;
+  width: 35%;
+}
+
+/* Estilo para el botón de buscar en FilterMeetupByIdForm */
+.filter-meetup-form-container button {
+  padding: 8px;
+  background-color: var(--color-rojo-medio);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.filter-meetup-form-container button:disabled {
+  background-color: var(--color-gris-medio);
+  cursor: not-allowed;
+}
+
+/* Estilo de hover para el botón en FilterMeetupByIdForm */
+.filter-meetup-form-container button:hover {
+  background-color: var(--color-rojo-oscuro);
+}
+
+.filtered-id-meetup-container {
+  max-width: 50%;
+  width: 100%;
+}
+
+li.meetups-list {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+li.meetups-list h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+li.meetups-list p {
+  font-size: 16px;
+  margin: 10px 0;
+}
+
+li.meetups-list img {
+  max-width: 62%;
+  max-height: 33.33%;
+}
+
+img.meetups-image {
+  height: 33.33%;
+}
+
+li.meetups-list p {
+  font-size: 16px;
+  margin: 10px 0;
+  text-align: left;
+}
+
+.filter-id-description {
+  max-width: 60%;
+}

@@ -1,0 +1,52 @@
+/* Estilo para el contenedor del formulario FilterByCityAndThemeForm */
+.filter-form-container {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 170px;
+  right: 0;
+  width: 50%;
+  padding: 20px;
+  z-index: 999;
+}
+
+/* Estilo para los elementos dentro del formulario */
+.filter-form-container input[type="text"],
+.filter-form-container button {
+  margin-right: 10px;
+  padding: 8px;
+  border: 1px solid var(--color-gris-medio);
+  border-radius: 5px;
+  font-size: 16px;
+  width: 100%;
+}
+
+/* Estilo de hover para los elementos */
+.filter-form-container input[type="text"]:hover,
+.filter-form-container button:hover {
+  border: 1px solid var(--color-gris-oscuro);
+  background-color: var(--color-gris-claro);
+  color: var(--color-negro);
+}
+
+/* Estilo para el botón en estado normal */
+.filter-form-container button {
+  background-color: var(--color-rojo-medio);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Estilo de hover para el botón en estado normal */
+.filter-form-container button:hover {
+  background-color: var(--color-rojo-oscuro);
+}
+
+/* Estilo de hover para el botón en estado deshabilitado */
+.filter-form-container button:disabled:hover {
+  background-color: var(--color-gris-medio);
+  cursor: not-allowed;
+}

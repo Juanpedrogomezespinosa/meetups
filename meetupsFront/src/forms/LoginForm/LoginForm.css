@@ -1,0 +1,59 @@
+/* Estilo para el contenedor del formulario en LoginForm */
+.form-container {
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+  background-color: var(--color-gris-claro);
+  border: 1px solid var(--color-gris-medio);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Estilo para el título "Login" en LoginForm */
+.form-title {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: var(--color-rojo-medio);
+}
+
+/* Estilo para las etiquetas dentro del componente */
+.form-container label {
+  display: block;
+  margin: 10px 0;
+  color: var(--color-negro);
+  font-size: 18px;
+}
+
+/* Estilo para los campos de entrada de texto en LoginForm */
+.form-container input[type="email"],
+.form-container input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid var(--color-gris-medio);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+/* Estilo para el botón de inicio de sesión en LoginForm */
+.form-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--color-rojo-medio);
+  color: var(--color-blanco);
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.form-container button:disabled {
+  background-color: var(--color-gris-medio);
+  cursor: not-allowed;
+}
+
+/* Estilo de hover para los botones en LoginForm */
+.form-container button:hover {
+  background-color: var(--color-rojo-oscuro);
+}
