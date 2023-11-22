@@ -1,16 +1,17 @@
 const mysql = require("mysql2/promise");
 
+const { MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE } = process.env;
+
 let pool;
 
 const getPool = () => {
   if (!pool) {
     pool = mysql.createPool({
-      host: "localhost",
-      port: 3306,
-      user: "demo",
-      password: "12345678",
-      database: "meetup",
-      timezone: "local",
+      host: MYSQL_HOST,
+      user: MYSQL_USER,
+      password: MYSQL_PASSWORD,
+      database: MYSQL_DATABASE,
+      timezone: "Z",
     });
   }
 
