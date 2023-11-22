@@ -32,7 +32,7 @@ La aplicación Meetup es una plataforma para crear y gestionar eventos y meetups
 3. Configura la base de datos:
 
 - Crea una base de datos MySQL llamada "meetup".
-- Importa el esquema de la base de datos desde el archivo "meetup.sql".
+- ejecuta el fichero "initDb.js" mediante el siguiente comando: node db/initDb.js para crear las tablas necesarias en la base de datos anteriormente creada.
 
 4. Instala Node.js y demás dependencias necesarias:
 
