@@ -20,24 +20,24 @@ app.use(express.json());
 app.post("/register", registerUser);
 app.post("/login", loginUser);
 
-const meetupController = require("./controllers/meetup/meetupController");
+// Importa las funciones de meetup directamente desde sus archivos individuales
+const listMeetups = require("./controllers/meetup/listMeetups");
+const filterMeetups = require("./controllers/meetup/filterMeetups");
+const getMeetupDetails = require("./controllers/meetup/getMeetupDetails");
+const getAttendeesCount = require("./controllers/meetup/getAttendeesCount");
+const joinMeetup = require("./controllers/meetup/joinMeetup");
+const leaveMeetup = require("./controllers/meetup/leaveMeetup");
+const isRegistered = require("./controllers/meetup/isRegistered");
+const createMeetup = require("./controllers/meetup/createMeetup");
 
-app.get("/meetups", meetupController.listMeetups);
-app.get("/meetups/filter", meetupController.filterMeetups);
-app.get("/meetups/:meetupId", meetupController.getMeetupDetails);
-app.get("/meetups/:meetupId/attendees", meetupController.getAttendeesCount);
+app.get("/meetups", listMeetups);
+app.get("/meetups/filter", filterMeetups);
+app.get("/meetups/:meetupId", getMeetupDetails);
+app.get("/meetups/:meetupId/attendees", getAttendeesCount);
 
-app.post("/meetups/:meetupId/join", validateAuth, meetupController.joinMeetup);
-app.post(
-  "/meetups/:meetupId/leave",
-  validateAuth,
-  meetupController.leaveMeetup
-);
-app.post(
-  "/meetups/:meetupId/registered",
-  validateAuth,
-  meetupController.isRegistered
-);
+app.post("/meetups/:meetupId/join", validateAuth, joinMeetup);
+app.post("/meetups/:meetupId/leave", validateAuth, leaveMeetup);
+app.post("/meetups/:meetupId/registered", validateAuth, isRegistered);
 
 // Middleware para permitir el acceso a la carpeta de imágenes
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -56,11 +56,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Ruta para crear una meetup con una imagen en form-data
-app.post(
-  "/meetup",
-  upload.single("meetupImage"),
-  meetupController.createMeetup
-);
+app.post("/meetup", upload.single("meetupImage"), createMeetup);
 
 app.use(errorHandler);
 
