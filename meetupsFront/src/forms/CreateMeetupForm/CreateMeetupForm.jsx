@@ -56,7 +56,7 @@ const CreateMeetupForm = ({ onMeetupCreated }) => {
         console.log("Server Response:", data);
         console.log("URL de la imagen:", data.imageUrl);
 
-        if (data && data.status === "ok" && (data.imageUrl || data.photo_url)) {
+        if (data && data.status === "ok" && data.meetupId && data.photo_url) {
           const newMeetup = {
             id: data.meetupId,
             title: formData.title,
@@ -66,7 +66,7 @@ const CreateMeetupForm = ({ onMeetupCreated }) => {
             date: formData.date,
             time: formData.time,
             attendees_count: 0,
-            imageUrl: data.imageUrl || data.photo_url,
+            photo_url: data.photo_url,
           };
 
           onMeetupCreated(newMeetup);

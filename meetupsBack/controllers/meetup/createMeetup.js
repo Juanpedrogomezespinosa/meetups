@@ -26,14 +26,11 @@ const createMeetup = async (req, res, next) => {
 
     const newMeetupId = result.insertId;
 
-    const imageUrl =
-      req.protocol + "://" + req.get("host") + "/uploads/" + photo_url;
-
     res.status(201).json({
       status: "ok",
       message: "Meetup creado",
       meetupId: newMeetupId,
-      imageUrl: imageUrl,
+      photo_url: photo_url,
     });
   } catch (error) {
     next(error);
