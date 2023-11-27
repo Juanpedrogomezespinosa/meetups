@@ -1,14 +1,16 @@
-import CreateMeetupForm from "../../forms/CreateMeetupForm/CreateMeetupForm";
-import { useMeetup } from "../../hooks/useMeetup";
 import { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import CreateMeetupForm from "../../forms/CreateMeetupForm/CreateMeetupForm";
+import { useMeetup } from "../../hooks/useMeetup";
+import { AuthContext } from "../../contexts/AuthContext";
 import FilterMeetupByIdForm from "../../forms/FilterMeetupByIdForm/FilterMeetupByIdForm";
 import FilterByCityAndThemeForm from "../../forms/FilterByCityAndThemeForm/FilterByCityAndThemeForm";
-import { AuthContext } from "../../contexts/AuthContext";
 import MeetupDetails from "../../components/MeetupsDetails/MeetupsDetails";
 import { getToken } from "../../utils/getToken";
 
 import "./HomePage.css";
+
+// const baseUrl = "http://localhost:3070/";
 
 const HomePage = () => {
   const { authUser } = useContext(AuthContext);
@@ -26,10 +28,15 @@ const HomePage = () => {
   }, []);
 
   const handleMeetupDetails = () => {
-    setMeetupDetails(meetupDetails);
+    console.log("handleMeetupDetails - meetupDetails:", meetupDetails);
+
+    if (meetupDetails) {
+      setMeetupDetails(meetupDetails);
+    }
   };
 
   const handleMeetupsFiltered = (city, theme) => {
+    console.log("handleMeetupsFiltered - City:", city, "Theme:", theme);
     fetch(`http://localhost:3070/meetups/filter?city=${city}&theme=${theme}`)
       .then((response) => {
         if (response.ok) {
@@ -40,7 +47,12 @@ const HomePage = () => {
         }
       })
       .then((data) => {
-        setFilteredMeetups(data.data);
+        console.log("handleMeetupsFiltered - Filtered Meetups:", data.data);
+        const meetupsWithImageUrl = data.data.map((meetup) => ({
+          ...meetup,
+          imageUrl: `http://localhost:3070/${meetup.photo_url}`,
+        }));
+        setFilteredMeetups(meetupsWithImageUrl);
       })
       .catch((error) => {
         console.error("Error de red al buscar meetups filtradas", error);
@@ -84,7 +96,7 @@ const HomePage = () => {
         if (data.message === "Already joined") {
           showSuccessMessage("Ya estás inscrito en esta meetup");
         } else {
-          showSuccessMessage("Ya estás inscrito en la meetup");
+          showSuccessMessage("Ya estás inscrito en esta meetup");
         }
       }
     } catch (error) {
@@ -167,18 +179,20 @@ const HomePage = () => {
       ) : null}
 
       <div>
-        {filteredMeetups ? (
+        {filteredMeetups && filteredMeetups.length > 0 ? (
           <div className="filter-city-theme-form">
             <ul className="meetups-list">
               <h2>Meetups filtradas por ciudad y tema: </h2>
               {filteredMeetups.map((meetup) => (
                 <li key={meetup.id}>
-                  {meetup.photo_url && (
+                  {meetup.imageUrl ? (
                     <img
                       src={`http://localhost:3070/${meetup.photo_url}`}
                       alt="Imagen del meetup"
                       className="meetup-image"
                     />
+                  ) : (
+                    <p>Imagen no disponible</p>
                   )}
                   <h3>{meetup.title}</h3>
                   <p>{meetup.description}</p>
@@ -198,7 +212,7 @@ const HomePage = () => {
                       }
                     )}
                   </p>
-                  <p>Asistentes: {meetup.attendees}</p>
+                  <p>Asistentes: {meetup.attendees_count || 0}</p>{" "}
                 </li>
               ))}
             </ul>
@@ -208,38 +222,43 @@ const HomePage = () => {
 
       <ul className="meetups-list">
         {meetups?.length > 0 ? (
-          meetups.map((meetup) => (
-            <li key={meetup.id}>
-              {meetup.photo_url && (
+          meetups.map((meetup, index) => (
+            <li key={index}>
+              {meetup && meetup.photo_url !== undefined ? (
                 <img
                   src={`http://localhost:3070/${meetup.photo_url}`}
                   alt="Imagen del meetup"
                   className="meetup-image"
                 />
+              ) : (
+                <p>Imagen no disponible</p>
               )}
-              <h3>{meetup.title}</h3>
-              <p>{meetup.description}</p>
-              <p>Tema: {meetup.theme}</p>
-              <p>Localización: {meetup.location}</p>
-              <p>Fecha: {new Date(meetup.date).toLocaleDateString("en-GB")}</p>
+
+              <h3>{meetup && meetup.title}</h3>
+              <p>{meetup && meetup.description}</p>
+              <p>Tema: {meetup && meetup.theme}</p>
+              <p>Localización: {meetup && meetup.location}</p>
+              <p>
+                Fecha:{" "}
+                {new Date(meetup && meetup.date).toLocaleDateString("en-GB")}
+              </p>
               <p>
                 Hora:{" "}
-                {new Date(`1970-01-01T${meetup.time}`).toLocaleTimeString(
-                  "en-US",
-                  {
-                    hour: "2-digit",
-                    minute: "2-digit",
-                    hour12: false,
-                  }
-                )}
+                {new Date(
+                  `1970-01-01T${meetup && meetup.time}`
+                ).toLocaleTimeString("en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: false,
+                })}
               </p>
-              <p>Asistentes: {attendeesCounts[meetup.id] || 0}</p>
+              <p>Asistentes: {attendeesCounts[meetup && meetup.id] || 0}</p>
               {authUser && (
                 <div>
-                  <button onClick={() => onSignUp(meetup.id)}>
+                  <button onClick={() => onSignUp(meetup && meetup.id)}>
                     Inscribirse
                   </button>
-                  <button onClick={() => onUnsubscribe(meetup.id)}>
+                  <button onClick={() => onUnsubscribe(meetup && meetup.id)}>
                     Darse de baja
                   </button>
                 </div>

@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import PropTypes from "prop-types";
 import { AuthContext } from "../../contexts/AuthContext";
-
 import "./CreateMeetupForm.css";
 
 const CreateMeetupForm = ({ onMeetupCreated }) => {
@@ -26,8 +25,10 @@ const CreateMeetupForm = ({ onMeetupCreated }) => {
     setFormData({ ...formData, image: imageFile });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("Form Data:", formData);
 
     if (formData.image) {
       const body = new FormData();
@@ -39,19 +40,46 @@ const CreateMeetupForm = ({ onMeetupCreated }) => {
       body.append("time", formData.time);
       body.append("meetupImage", formData.image);
 
-      fetch("http://localhost:3070/meetup/", {
-        method: "POST",
-        body: body,
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.status === "ok") {
-            onMeetupCreated(data.meetup);
-          } else {
-            console.error("Error al subir el meetup al servidor.");
-          }
+      console.log("Submitting Form Data to Server...");
+
+      try {
+        const response = await fetch("http://localhost:3070/meetup/", {
+          method: "POST",
+          body: body,
         });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log("Server Response:", data);
+        console.log("URL de la imagen:", data.imageUrl);
+
+        if (data && data.status === "ok" && (data.imageUrl || data.photo_url)) {
+          const newMeetup = {
+            id: data.meetupId,
+            title: formData.title,
+            description: formData.description,
+            theme: formData.theme,
+            location: formData.location,
+            date: formData.date,
+            time: formData.time,
+            attendees_count: 0,
+            imageUrl: data.imageUrl || data.photo_url,
+          };
+
+          onMeetupCreated(newMeetup);
+        } else {
+          console.error("Error en la respuesta del servidor:", data.message);
+        }
+      } catch (error) {
+        console.error("Error al realizar la solicitud:", error);
+      }
     } else {
+      console.log(
+        "Por favor, selecciona una imagen antes de enviar el formulario."
+      );
       alert("Por favor, selecciona una imagen antes de enviar el formulario.");
     }
   };

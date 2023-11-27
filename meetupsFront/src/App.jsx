@@ -1,9 +1,6 @@
-// Importamos los componentes.
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import { Route, Routes } from "react-router-dom";
-
-// Imporamos las páginas
 import HomePage from "./pages/HomePage/HomePage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
