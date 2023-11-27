@@ -28,8 +28,6 @@ const CreateMeetupForm = ({ onMeetupCreated }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("Form Data:", formData);
-
     if (formData.image) {
       const body = new FormData();
       body.append("title", formData.title);
@@ -39,8 +37,6 @@ const CreateMeetupForm = ({ onMeetupCreated }) => {
       body.append("date", formData.date);
       body.append("time", formData.time);
       body.append("meetupImage", formData.image);
-
-      console.log("Submitting Form Data to Server...");
 
       try {
         const response = await fetch("http://localhost:3070/meetup/", {
@@ -53,8 +49,6 @@ const CreateMeetupForm = ({ onMeetupCreated }) => {
         }
 
         const data = await response.json();
-        console.log("Server Response:", data);
-        console.log("URL de la imagen:", data.imageUrl);
 
         if (data && data.status === "ok" && data.meetupId && data.photo_url) {
           const newMeetup = {

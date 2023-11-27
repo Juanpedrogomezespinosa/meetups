@@ -28,15 +28,12 @@ const HomePage = () => {
   }, []);
 
   const handleMeetupDetails = () => {
-    console.log("handleMeetupDetails - meetupDetails:", meetupDetails);
-
     if (meetupDetails) {
       setMeetupDetails(meetupDetails);
     }
   };
 
   const handleMeetupsFiltered = (city, theme) => {
-    console.log("handleMeetupsFiltered - City:", city, "Theme:", theme);
     fetch(`http://localhost:3070/meetups/filter?city=${city}&theme=${theme}`)
       .then((response) => {
         if (response.ok) {
@@ -47,7 +44,6 @@ const HomePage = () => {
         }
       })
       .then((data) => {
-        console.log("handleMeetupsFiltered - Filtered Meetups:", data.data);
         const meetupsWithImageUrl = data.data.map((meetup) => ({
           ...meetup,
           imageUrl: `http://localhost:3070/${meetup.photo_url}`,
