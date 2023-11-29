@@ -10,8 +10,6 @@ import { getToken } from "../../utils/getToken";
 
 import "./HomePage.css";
 
-// const baseUrl = "http://localhost:3070/";
-
 const HomePage = () => {
   const { authUser } = useContext(AuthContext);
   const { meetups, addMeetup, setSearchParams, loading } = useMeetup();
@@ -19,6 +17,12 @@ const HomePage = () => {
   const [filteredMeetups, setFilteredMeetups] = useState(null);
   const [attendeesCounts, setAttendeesCount] = useState({});
   const [successMessage, setSuccessMessage] = useState(null);
+  const [isCreateMeetupFormVisible, setCreateMeetupFormVisibility] =
+    useState(false);
+
+  const handleToggleCreateMeetupForm = () => {
+    setCreateMeetupFormVisibility(!isCreateMeetupFormVisible);
+  };
 
   useEffect(() => {
     const storedCounts = JSON.parse(localStorage.getItem("attendeesCounts"));
@@ -163,7 +167,20 @@ const HomePage = () => {
         onMeetupsFiltered={handleMeetupsFiltered}
         loading={loading}
       />
-      {authUser && <CreateMeetupForm onMeetupCreated={addMeetup} />}
+      {/* {authUser && <CreateMeetupForm onMeetupCreated={addMeetup} />} */}
+      {authUser && (
+        <button onClick={handleToggleCreateMeetupForm}>
+          <img
+            src="./src/assets/crear.png"
+            alt="Crear Meetup"
+            style={{ width: "40px", height: "40px" }}
+          />
+        </button>
+      )}
+
+      {isCreateMeetupFormVisible && (
+        <CreateMeetupForm onMeetupCreated={addMeetup} />
+      )}
 
       {meetupDetails ? (
         <MeetupDetails

@@ -73,7 +73,11 @@ const FilterMeetupByIdForm = ({ onMeetupDetails, loading }) => {
         placeholder="ID de la Meetup"
       />
       <button onClick={handleSearch} disabled={loading}>
-        Buscar
+        <img
+          src="./src/assets/buscar.png"
+          alt="Crear Meetup"
+          style={{ width: "40px", height: "40px" }}
+        />
       </button>
       {formattedMeetup && (
         <div className="filtered-id-meetup-container">
