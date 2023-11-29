@@ -76,7 +76,7 @@ const FilterMeetupByIdForm = ({ onMeetupDetails, loading }) => {
         <img
           src="./src/assets/buscar.png"
           alt="Crear Meetup"
-          style={{ width: "40px", height: "40px" }}
+          style={{ width: "20px", height: "20px" }}
         />
       </button>
       {formattedMeetup && (
@@ -92,7 +92,7 @@ const FilterMeetupByIdForm = ({ onMeetupDetails, loading }) => {
           </div>
           <ul>
             <h2>Meetups Filtradas por ID:</h2>
-            <li className="meetups-list" key={formattedMeetup.id}>
+            <li className="tarjeta-id" key={formattedMeetup.id}>
               {formattedMeetup.photo_url && (
                 <img
                   src={`http://localhost:3070/${formattedMeetup.photo_url}`}
@@ -104,54 +104,56 @@ const FilterMeetupByIdForm = ({ onMeetupDetails, loading }) => {
               <p className="filter-id-description">
                 {formattedMeetup.description}
               </p>
-              <p className="datos-meetups">
-                {" "}
-                <img
-                  src="./src/assets/tema.png"
-                  alt="icono tema"
-                  style={{ width: "40px", height: "40px" }}
-                />{" "}
-                {formattedMeetup.theme}
-              </p>
-              <p className="datos-meetups">
-                {" "}
-                <img
-                  src="./src/assets/localizacion.png"
-                  alt="icono localización"
-                  style={{ width: "40px", height: "40px" }}
-                />{" "}
-                {formattedMeetup.location}
-              </p>
-              <p className="datos-meetups">
-                <img
-                  src="./src/assets/fecha.png"
-                  alt="icono fecha"
-                  style={{ width: "40px", height: "40px" }}
-                />{" "}
-                {new Date(formattedMeetup.date).toLocaleDateString("en-GB")}
-              </p>
-              <p className="datos-meetups">
-                <img
-                  src="./src/assets/hora.png"
-                  alt="icono hora"
-                  style={{ width: "40px", height: "40px" }}
-                />{" "}
-                {new Date(
-                  `1970-01-01T${formattedMeetup.time}`
-                ).toLocaleTimeString("en-US", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  hour12: false,
-                })}
-              </p>
-              <p className="datos-meetups">
-                <img
-                  src="./src/assets/asistentes.png"
-                  alt="icono asistentes"
-                  style={{ width: "40px", height: "40px" }}
-                />{" "}
-                {attendees || 0}
-              </p>
+              <div className="datos-container-id">
+                <p className="datos-meetups">
+                  {" "}
+                  <img
+                    src="./src/assets/tema.png"
+                    alt="icono tema"
+                    style={{ width: "40px", height: "40px" }}
+                  />{" "}
+                  {formattedMeetup.theme}
+                </p>
+                <p className="datos-meetups">
+                  {" "}
+                  <img
+                    src="./src/assets/localizacion.png"
+                    alt="icono localización"
+                    style={{ width: "40px", height: "40px" }}
+                  />{" "}
+                  {formattedMeetup.location}
+                </p>
+                <p className="datos-meetups">
+                  <img
+                    src="./src/assets/fecha.png"
+                    alt="icono fecha"
+                    style={{ width: "40px", height: "40px" }}
+                  />{" "}
+                  {new Date(formattedMeetup.date).toLocaleDateString("en-GB")}
+                </p>
+                <p className="datos-meetups">
+                  <img
+                    src="./src/assets/hora.png"
+                    alt="icono hora"
+                    style={{ width: "40px", height: "40px" }}
+                  />{" "}
+                  {new Date(
+                    `1970-01-01T${formattedMeetup.time}`
+                  ).toLocaleTimeString("en-US", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                  })}
+                </p>
+                <p className="datos-meetups">
+                  <img
+                    src="./src/assets/asistentes.png"
+                    alt="icono asistentes"
+                    style={{ width: "40px", height: "40px" }}
+                  />{" "}
+                  {attendees || 0}
+                </p>
+              </div>
             </li>
           </ul>
         </div>

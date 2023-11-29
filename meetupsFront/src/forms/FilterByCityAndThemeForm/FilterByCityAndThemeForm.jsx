@@ -31,7 +31,7 @@ const FilterByCityAndThemeForm = ({ onMeetupsFiltered, loading }) => {
         <img
           src="./src/assets/buscar.png"
           alt="Crear Meetup"
-          style={{ width: "40px", height: "40px" }}
+          style={{ width: "20px", height: "20px" }}
         />
       </button>
     </div>

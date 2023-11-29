@@ -18,9 +18,45 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1.5rem;
-  margin: 150px 1rem 1rem 1rem;
+  /* margin: 150px 1rem 1rem 1rem; */
   max-width: 100%;
   flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.tarjeta-id {
+  /* width: calc(33.33% - 1rem); */
+  max-width: 350px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  /* padding: 1rem; */
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 20px;
+  height: 400px;
+}
+.tarjeta-id > h3 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 25px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+p.filter-id-description {
+  margin-bottom: 10px;
+
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.datos-container-id {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.tarjeta-id > img {
+  border-radius: 20px 20px 0 0;
 }
 
 /* Estilo para los campos de entrada de texto en FilterMeetupByIdForm */
@@ -47,6 +83,8 @@
   transition: background-color 0.3s;
   margin-left: 10px;
   vertical-align: middle;
+  max-width: 45px;
+  max-height: 35px;
 }
 
 .filter-meetup-form-container button:disabled {
@@ -73,7 +111,7 @@ li.meetups-list {
 /* .meetups-list li {
 } */
 
-li.meetups-list h3 {
+/* li.meetups-list h3 {
   font-size: 20px;
   margin-bottom: 10px;
   text-align: left;
@@ -101,4 +139,4 @@ li.meetups-list p {
 
 .filter-id-description {
   max-width: 60%;
-}
+} */

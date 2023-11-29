@@ -156,24 +156,26 @@ const HomePage = () => {
       {successMessage && (
         <div className="success-message">{successMessage}</div>
       )}
-      <FilterMeetupByIdForm
-        className="filter-meetup-form"
-        setSearchParams={setSearchParams}
-        onMeetupDetails={handleMeetupDetails}
-        loading={loading}
-      />
-      <FilterByCityAndThemeForm
-        className="filter-city-theme-form"
-        onMeetupsFiltered={handleMeetupsFiltered}
-        loading={loading}
-      />
+      <div className="prueba">
+        <FilterMeetupByIdForm
+          className="filter-meetup-form"
+          setSearchParams={setSearchParams}
+          onMeetupDetails={handleMeetupDetails}
+          loading={loading}
+        />
+        <FilterByCityAndThemeForm
+          className="filter-city-theme-form"
+          onMeetupsFiltered={handleMeetupsFiltered}
+          loading={loading}
+        />
+      </div>
       {/* {authUser && <CreateMeetupForm onMeetupCreated={addMeetup} />} */}
       {authUser && (
         <button onClick={handleToggleCreateMeetupForm}>
           <img
             src="./src/assets/crear.png"
             alt="Crear Meetup"
-            style={{ width: "40px", height: "40px" }}
+            style={{ width: "20px", height: "20px" }}
           />
         </button>
       )}
@@ -197,7 +199,7 @@ const HomePage = () => {
             <ul className="meetups-list">
               <h2>Meetups filtradas por ciudad y tema: </h2>
               {filteredMeetups.map((meetup) => (
-                <li key={meetup.id}>
+                <li className="tarjeta-id" key={meetup.id}>
                   {meetup.imageUrl ? (
                     <img
                       src={`http://localhost:3070/${meetup.photo_url}`}
@@ -208,54 +210,58 @@ const HomePage = () => {
                     <p>Imagen no disponible</p>
                   )}
                   <h3>{meetup.title}</h3>
-                  <p>{meetup.description}</p>
-                  <p className="datos-meetups">
-                    <img
-                      src="./src/assets/tema.png"
-                      alt="icono tema"
-                      style={{ width: "40px", height: "40px" }}
-                    />{" "}
-                    {meetup.theme}
+                  <p className="filter-city-theme-description">
+                    {meetup.description}
                   </p>
-                  <p className="datos-meetups">
-                    <img
-                      src="./src/assets/localizacion.png"
-                      alt="icono localización"
-                      style={{ width: "40px", height: "40px" }}
-                    />{" "}
-                    {meetup.location}
-                  </p>
-                  <p className="datos-meetups">
-                    <img
-                      src="./src/assets/fecha.png"
-                      alt="icono fecha"
-                      style={{ width: "40px", height: "40px" }}
-                    />{" "}
-                    {new Date(meetup.date).toLocaleDateString("en-GB")}
-                  </p>
-                  <p className="datos-meetups">
-                    <img
-                      src="./src/assets/hora.png"
-                      alt="icono hora"
-                      style={{ width: "40px", height: "40px" }}
-                    />{" "}
-                    {new Date(`1970-01-01T${meetup.time}`).toLocaleTimeString(
-                      "en-US",
-                      {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        hour12: false,
-                      }
-                    )}
-                  </p>
-                  <p className="datos-meetups">
-                    <img
-                      src="./src/assets/asistentes.png"
-                      alt="icono asistentes"
-                      style={{ width: "40px", height: "40px" }}
-                    />{" "}
-                    {meetup.attendees_count || 0}
-                  </p>{" "}
+                  <div className="datos-container-city-theme">
+                    <p className="datos-meetups">
+                      <img
+                        src="./src/assets/tema.png"
+                        alt="icono tema"
+                        style={{ width: "40px", height: "40px" }}
+                      />{" "}
+                      {meetup.theme}
+                    </p>
+                    <p className="datos-meetups">
+                      <img
+                        src="./src/assets/localizacion.png"
+                        alt="icono localización"
+                        style={{ width: "40px", height: "40px" }}
+                      />{" "}
+                      {meetup.location}
+                    </p>
+                    <p className="datos-meetups">
+                      <img
+                        src="./src/assets/fecha.png"
+                        alt="icono fecha"
+                        style={{ width: "40px", height: "40px" }}
+                      />{" "}
+                      {new Date(meetup.date).toLocaleDateString("en-GB")}
+                    </p>
+                    <p className="datos-meetups">
+                      <img
+                        src="./src/assets/hora.png"
+                        alt="icono hora"
+                        style={{ width: "40px", height: "40px" }}
+                      />{" "}
+                      {new Date(`1970-01-01T${meetup.time}`).toLocaleTimeString(
+                        "en-US",
+                        {
+                          hour: "2-digit",
+                          minute: "2-digit",
+                          hour12: false,
+                        }
+                      )}
+                    </p>
+                    <p className="datos-meetups">
+                      <img
+                        src="./src/assets/asistentes.png"
+                        alt="icono asistentes"
+                        style={{ width: "40px", height: "40px" }}
+                      />{" "}
+                      {meetup.attendees_count || 0}
+                    </p>{" "}
+                  </div>
                 </li>
               ))}
             </ul>
@@ -278,7 +284,9 @@ const HomePage = () => {
               )}
 
               <h3>{meetup && meetup.title}</h3>
-              <p>{meetup && meetup.description}</p>
+              <p className="meetups-list-description">
+                {meetup && meetup.description}
+              </p>
 
               <div className="datos-container">
                 <p className="datos-meetups">

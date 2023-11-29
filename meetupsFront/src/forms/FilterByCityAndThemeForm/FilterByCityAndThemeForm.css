@@ -38,6 +38,8 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
+  max-width: 45px;
+  max-height: 35px;
 }
 
 /* Estilo de hover para el botón en estado normal */
