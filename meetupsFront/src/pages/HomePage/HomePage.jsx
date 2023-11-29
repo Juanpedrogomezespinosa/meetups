@@ -209,13 +209,36 @@ const HomePage = () => {
                   )}
                   <h3>{meetup.title}</h3>
                   <p>{meetup.description}</p>
-                  <p>Tema: {meetup.theme}</p>
-                  <p>Localización: {meetup.location}</p>
-                  <p>
-                    Fecha: {new Date(meetup.date).toLocaleDateString("en-GB")}
+                  <p className="datos-meetups">
+                    <img
+                      src="./src/assets/tema.png"
+                      alt="icono tema"
+                      style={{ width: "40px", height: "40px" }}
+                    />{" "}
+                    {meetup.theme}
                   </p>
-                  <p>
-                    Hora:{" "}
+                  <p className="datos-meetups">
+                    <img
+                      src="./src/assets/localizacion.png"
+                      alt="icono localización"
+                      style={{ width: "40px", height: "40px" }}
+                    />{" "}
+                    {meetup.location}
+                  </p>
+                  <p className="datos-meetups">
+                    <img
+                      src="./src/assets/fecha.png"
+                      alt="icono fecha"
+                      style={{ width: "40px", height: "40px" }}
+                    />{" "}
+                    {new Date(meetup.date).toLocaleDateString("en-GB")}
+                  </p>
+                  <p className="datos-meetups">
+                    <img
+                      src="./src/assets/hora.png"
+                      alt="icono hora"
+                      style={{ width: "40px", height: "40px" }}
+                    />{" "}
                     {new Date(`1970-01-01T${meetup.time}`).toLocaleTimeString(
                       "en-US",
                       {
@@ -225,7 +248,14 @@ const HomePage = () => {
                       }
                     )}
                   </p>
-                  <p>Asistentes: {meetup.attendees_count || 0}</p>{" "}
+                  <p className="datos-meetups">
+                    <img
+                      src="./src/assets/asistentes.png"
+                      alt="icono asistentes"
+                      style={{ width: "40px", height: "40px" }}
+                    />{" "}
+                    {meetup.attendees_count || 0}
+                  </p>{" "}
                 </li>
               ))}
             </ul>
@@ -249,23 +279,6 @@ const HomePage = () => {
 
               <h3>{meetup && meetup.title}</h3>
               <p>{meetup && meetup.description}</p>
-              <p>Tema: {meetup && meetup.theme}</p>
-              <p>Localización: {meetup && meetup.location}</p>
-              <p>
-                Fecha:{" "}
-                {new Date(meetup && meetup.date).toLocaleDateString("en-GB")}
-              </p>
-              <p>
-                Hora:{" "}
-                {new Date(
-                  `1970-01-01T${meetup && meetup.time}`
-                ).toLocaleTimeString("en-US", {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                  hour12: false,
-                })}
-              </p>
-              <p>Asistentes: {attendeesCounts[meetup && meetup.id] || 0}</p>
               {authUser && (
                 <div>
                   <button onClick={() => onSignUp(meetup && meetup.id)}>
@@ -276,6 +289,54 @@ const HomePage = () => {
                   </button>
                 </div>
               )}
+              <div className="datos-container">
+                <p className="datos-meetups">
+                  <img
+                    src="./src/assets/tema.png"
+                    alt="icono tema"
+                    style={{ width: "40px", height: "40px" }}
+                  />{" "}
+                  {meetup && meetup.theme}
+                </p>
+                <p className="datos-meetups">
+                  <img
+                    src="./src/assets/localizacion.png"
+                    alt="icono localización"
+                    style={{ width: "40px", height: "40px" }}
+                  />{" "}
+                  {meetup && meetup.location}
+                </p>
+                <p className="datos-meetups">
+                  <img
+                    src="./src/assets/fecha.png"
+                    alt="icono fecha"
+                    style={{ width: "40px", height: "40px" }}
+                  />{" "}
+                  {new Date(meetup && meetup.date).toLocaleDateString("en-GB")}
+                </p>
+                <p className="datos-meetups">
+                  <img
+                    src="./src/assets/hora.png"
+                    alt="icono hora"
+                    style={{ width: "40px", height: "40px" }}
+                  />{" "}
+                  {new Date(
+                    `1970-01-01T${meetup && meetup.time}`
+                  ).toLocaleTimeString("en-US", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                  })}
+                </p>
+                <p className="datos-meetups">
+                  <img
+                    src="./src/assets/asistentes.png"
+                    alt="icono asistentes"
+                    style={{ width: "40px", height: "40px" }}
+                  />{" "}
+                  {attendeesCounts[meetup && meetup.id] || 0}
+                </p>
+              </div>
             </li>
           ))
         ) : (

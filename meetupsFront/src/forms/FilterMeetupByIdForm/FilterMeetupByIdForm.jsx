@@ -91,8 +91,8 @@ const FilterMeetupByIdForm = ({ onMeetupDetails, loading }) => {
             )}
           </div>
           <ul>
+            <h2>Meetups Filtradas por ID:</h2>
             <li className="meetups-list" key={formattedMeetup.id}>
-              <h2>Meetups Filtradas por ID:</h2>
               {formattedMeetup.photo_url && (
                 <img
                   src={`http://localhost:3070/${formattedMeetup.photo_url}`}
@@ -100,18 +100,42 @@ const FilterMeetupByIdForm = ({ onMeetupDetails, loading }) => {
                   className="meetup-image"
                 />
               )}
-              <h3>Titulo: {formattedMeetup.title}</h3>
+              <h3>{formattedMeetup.title}</h3>
               <p className="filter-id-description">
-                Descripción: {formattedMeetup.description}
+                {formattedMeetup.description}
               </p>
-              <p>Tema: {formattedMeetup.theme}</p>
-              <p>Localización: {formattedMeetup.location}</p>
-              <p>
-                Fecha:{" "}
+              <p className="datos-meetups">
+                {" "}
+                <img
+                  src="./src/assets/tema.png"
+                  alt="icono tema"
+                  style={{ width: "40px", height: "40px" }}
+                />{" "}
+                {formattedMeetup.theme}
+              </p>
+              <p className="datos-meetups">
+                {" "}
+                <img
+                  src="./src/assets/localizacion.png"
+                  alt="icono localización"
+                  style={{ width: "40px", height: "40px" }}
+                />{" "}
+                {formattedMeetup.location}
+              </p>
+              <p className="datos-meetups">
+                <img
+                  src="./src/assets/fecha.png"
+                  alt="icono fecha"
+                  style={{ width: "40px", height: "40px" }}
+                />{" "}
                 {new Date(formattedMeetup.date).toLocaleDateString("en-GB")}
               </p>
-              <p>
-                Hora:{" "}
+              <p className="datos-meetups">
+                <img
+                  src="./src/assets/hora.png"
+                  alt="icono hora"
+                  style={{ width: "40px", height: "40px" }}
+                />{" "}
                 {new Date(
                   `1970-01-01T${formattedMeetup.time}`
                 ).toLocaleTimeString("en-US", {
@@ -120,7 +144,14 @@ const FilterMeetupByIdForm = ({ onMeetupDetails, loading }) => {
                   hour12: false,
                 })}
               </p>
-              <p>Asistentes: {attendees || 0}</p>
+              <p className="datos-meetups">
+                <img
+                  src="./src/assets/asistentes.png"
+                  alt="icono asistentes"
+                  style={{ width: "40px", height: "40px" }}
+                />{" "}
+                {attendees || 0}
+              </p>
             </li>
           </ul>
         </div>
