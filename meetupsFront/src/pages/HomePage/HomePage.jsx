@@ -279,16 +279,7 @@ const HomePage = () => {
 
               <h3>{meetup && meetup.title}</h3>
               <p>{meetup && meetup.description}</p>
-              {authUser && (
-                <div>
-                  <button onClick={() => onSignUp(meetup && meetup.id)}>
-                    Inscribirse
-                  </button>
-                  <button onClick={() => onUnsubscribe(meetup && meetup.id)}>
-                    Darse de baja
-                  </button>
-                </div>
-              )}
+
               <div className="datos-container">
                 <p className="datos-meetups">
                   <img
@@ -337,6 +328,16 @@ const HomePage = () => {
                   {attendeesCounts[meetup && meetup.id] || 0}
                 </p>
               </div>
+              {authUser && (
+                <div>
+                  <button onClick={() => onSignUp(meetup && meetup.id)}>
+                    Inscribirse
+                  </button>
+                  <button onClick={() => onUnsubscribe(meetup && meetup.id)}>
+                    Darse de baja
+                  </button>
+                </div>
+              )}
             </li>
           ))
         ) : (
