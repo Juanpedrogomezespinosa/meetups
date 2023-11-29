@@ -156,6 +156,15 @@ const HomePage = () => {
       {successMessage && (
         <div className="success-message">{successMessage}</div>
       )}
+      {authUser && (
+        <button onClick={handleToggleCreateMeetupForm}>
+          <img
+            src="./src/assets/crear.png"
+            alt="Crear Meetup"
+            style={{ width: "20px", height: "20px" }}
+          />
+        </button>
+      )}
       <div className="prueba">
         <FilterMeetupByIdForm
           className="filter-meetup-form"
@@ -169,16 +178,6 @@ const HomePage = () => {
           loading={loading}
         />
       </div>
-      {/* {authUser && <CreateMeetupForm onMeetupCreated={addMeetup} />} */}
-      {authUser && (
-        <button onClick={handleToggleCreateMeetupForm}>
-          <img
-            src="./src/assets/crear.png"
-            alt="Crear Meetup"
-            style={{ width: "20px", height: "20px" }}
-          />
-        </button>
-      )}
 
       {isCreateMeetupFormVisible && (
         <CreateMeetupForm onMeetupCreated={addMeetup} />
@@ -193,7 +192,7 @@ const HomePage = () => {
         />
       ) : null}
 
-      <div>
+      <div className="001">
         {filteredMeetups && filteredMeetups.length > 0 ? (
           <div className="filter-city-theme-form">
             <ul className="meetups-list">
