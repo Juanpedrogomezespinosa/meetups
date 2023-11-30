@@ -115,7 +115,7 @@ h2 {
   align-items: flex-start;
 }
 
-.prueba {
+.contenedor-formularios {
   display: flex;
   align-items: center;
   justify-content: space-between;

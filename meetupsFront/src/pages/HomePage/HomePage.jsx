@@ -180,7 +180,7 @@ const HomePage = () => {
 
   return (
     <main>
-      <div className="prueba">
+      <div className="contenedor-formularios">
         <div className="divs-formularios">
           <FilterMeetupByIdForm
             className="filter-meetup-form"
