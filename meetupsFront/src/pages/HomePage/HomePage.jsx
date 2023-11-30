@@ -227,8 +227,9 @@ const HomePage = () => {
                 />
               )}
             </div>
-            <ul>
-              <h2>Meetups Filtradas por ID:</h2>
+
+            <ul className="ul-filtrada-id">
+              <h2 className="h2-meetups-id">Meetups Filtradas por ID:</h2>
               <li className="tarjeta-id" key={formattedMeetup.id}>
                 {formattedMeetup.photo_url && (
                   <img

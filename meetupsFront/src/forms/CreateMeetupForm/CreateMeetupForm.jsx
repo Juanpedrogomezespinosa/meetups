@@ -87,12 +87,14 @@ const CreateMeetupForm = ({ onMeetupCreated, onClose }) => {
   return (
     <div className="full-container" onClick={handleClose}>
       <div
-        className="create-meetup-container"
+        className="form-container create-meetup-container"
         onClick={(e) => e.stopPropagation()}
       >
         {authUser ? (
-          <form onSubmit={handleSubmit}>
-            <label htmlFor="image">Imagen:</label>
+          <form onSubmit={handleSubmit} className="meetup-form">
+            <label className="form-label" htmlFor="image">
+              Imagen:
+            </label>
             <input
               type="file"
               id="image"
@@ -100,7 +102,9 @@ const CreateMeetupForm = ({ onMeetupCreated, onClose }) => {
               accept="image/*"
               onChange={handleImageChange}
             />
-            <label htmlFor="title">Título:</label>
+            <label className="form-label" htmlFor="title">
+              Título:
+            </label>
             <input
               type="text"
               id="title"
@@ -108,14 +112,18 @@ const CreateMeetupForm = ({ onMeetupCreated, onClose }) => {
               value={formData.title}
               onChange={handleChange}
             />
-            <label htmlFor="description">Descripción:</label>
+            <label className="form-label" htmlFor="description">
+              Descripción:
+            </label>
             <textarea
               id="description"
               name="description"
               value={formData.description}
               onChange={handleChange}
             />
-            <label htmlFor="theme">Tema:</label>
+            <label className="form-label" htmlFor="theme">
+              Tema:
+            </label>
             <input
               type="text"
               id="theme"
@@ -123,7 +131,9 @@ const CreateMeetupForm = ({ onMeetupCreated, onClose }) => {
               value={formData.theme}
               onChange={handleChange}
             />
-            <label htmlFor="location">Ubicación:</label>
+            <label className="form-label" htmlFor="location">
+              Ubicación:
+            </label>
             <input
               type="text"
               id="location"
@@ -131,7 +141,9 @@ const CreateMeetupForm = ({ onMeetupCreated, onClose }) => {
               value={formData.location}
               onChange={handleChange}
             />
-            <label htmlFor="date">Fecha:</label>
+            <label className="form-label" htmlFor="date">
+              Fecha:
+            </label>
             <input
               type="date"
               id="date"
@@ -139,7 +151,9 @@ const CreateMeetupForm = ({ onMeetupCreated, onClose }) => {
               value={formData.date}
               onChange={handleChange}
             />
-            <label htmlFor="time">Hora:</label>
+            <label className="form-label" htmlFor="time">
+              Hora:
+            </label>
             <input
               type="time"
               id="time"
@@ -147,7 +161,9 @@ const CreateMeetupForm = ({ onMeetupCreated, onClose }) => {
               value={formData.time}
               onChange={handleChange}
             />
-            <button type="submit">Crear Meetup</button>
+            <button type="submit" className="form-button">
+              Crear Meetup
+            </button>
           </form>
         ) : (
           <p>Debes iniciar sesión para crear meetups.</p>

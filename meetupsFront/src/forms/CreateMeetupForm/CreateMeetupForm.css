@@ -1,63 +1,52 @@
-/* Estilo para el contenedor del formulario CreateMeetupForm */
 .full-container {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.create-meetup-container {
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
-  background-color: white;
+  justify-content: center;
   align-items: center;
-  position: absolute;
-  top: 120px;
-  left: 0;
-  width: 100%;
-  padding: 20px;
-  z-index: 999;
-  margin-top: 130px;
 }
 
-/* Estilo para los elementos dentro del formulario */
-.create-meetup-container label {
-  margin-right: 10px;
-  padding: 5px;
+.form-container.create-meetup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-gris-claro);
+  border: 1px solid var(--color-gris-medio);
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 80%;
+  max-height: 80%;
+  overflow: auto;
+}
+
+.form-container.create-meetup-container form {
+  width: 100%;
+}
+
+.form-label {
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+.meetup-form input[type="text"],
+.meetup-form input[type="date"],
+.meetup-form input[type="time"],
+.meetup-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
   border: 1px solid var(--color-gris-medio);
   border-radius: 5px;
-  font-size: 14px;
-  cursor: default;
+  font-size: 16px;
 }
 
-.create-meetup-container input[type="text"]:hover,
-.create-meetup-container input[type="date"]:hover,
-.create-meetup-container input[type="time"]:hover,
-.create-meetup-container textarea:hover,
-.create-meetup-container button:hover {
-  border: 1px solid var(--color-gris-oscuro);
-  background-color: var(--color-gris-claro);
-  color: var(--color-negro);
-}
-
-/* Estilo de hover para los elementos */
-.create-meetup-container label:hover,
-.create-meetup-container input[type="text"]:hover,
-.create-meetup-container input[type="date"]:hover,
-.create-meetup-container input[type="time"]:hover,
-.create-meetup-container textarea:hover,
-.create-meetup-container button:hover {
-  border: 1px solid var(--color-gris-oscuro);
-  background-color: var(--color-gris-claro);
-  color: var(--color-negro);
-}
-
-/* Estilo específico para el botón en estado normal */
-.create-meetup-container button {
-  margin-right: 10px;
-  margin-left: 10px;
-
+.meetup-form button {
+  margin: 10px 0;
   padding: 8px;
   background-color: var(--color-rojo-medio);
   color: var(--color-blanco);
@@ -65,16 +54,14 @@
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  pointer-events: auto;
   transition: background-color 0.3s;
 }
 
-.create-meetup-container button:hover {
+.meetup-form button:hover {
   background-color: var(--color-rojo-oscuro);
 }
 
-/* Estilo de hover para el botón en estado deshabilitado */
-.create-meetup-container button:disabled:hover {
+.meetup-form button:disabled:hover {
   background-color: var(--color-gris-medio);
   cursor: not-allowed;
 }
