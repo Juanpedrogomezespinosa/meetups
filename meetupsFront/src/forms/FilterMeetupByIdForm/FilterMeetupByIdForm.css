@@ -7,21 +7,23 @@
   vertical-align: middle;
 }
 
-.meetups-list {
+/* .meetups-list {
   list-style: none;
   color: black;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 1;
   flex-wrap: wrap;
   gap: 1.5rem;
-  /* margin: 150px 1rem 1rem 1rem; */
+  margin: 150px 1rem 1rem 1rem;
   max-width: 100%;
   flex-wrap: wrap;
   margin-top: 30px;
-}
+} */
 
 .tarjeta-id {
-  width: unset !important;
+  /* width: unset !important; */
+  width: 100%;
   max-width: 350px;
   margin-bottom: 1.5rem;
   display: flex;

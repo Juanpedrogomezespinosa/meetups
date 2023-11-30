@@ -4,14 +4,14 @@
   align-items: center;
   top: 170px;
   right: 0;
-  width: 50%;
+  width: 70%;
   padding: 20px;
 }
 
 /* Estilo para los elementos dentro del formulario */
 .filter-form-container input[type="text"],
 .filter-form-container button {
-  margin-right: 10px;
+  margin-right: 5px;
   padding: 8px;
   border: 1px solid var(--color-gris-medio);
   border-radius: 5px;

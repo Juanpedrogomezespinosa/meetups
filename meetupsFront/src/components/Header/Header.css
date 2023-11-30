@@ -3,7 +3,7 @@ div.app > header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: var(--color-blanco);
+  background-color: var(--color-semi-negro);
   color: var(--color-blanco);
 }
 
@@ -26,7 +26,7 @@ nav {
 
 .logout-icon {
   margin-left: 10px;
-  background-color: var(--color-blanco);
+  background-color: var(--color-semi-negro);
   width: max-content;
   border: none;
   padding: 0;
@@ -36,4 +36,6 @@ nav {
 .logout-icon-image {
   padding: 5px;
   width: 45px;
+  filter: invert(99%) sepia(1%) saturate(220%) hue-rotate(24deg)
+    brightness(117%) contrast(100%);
 }

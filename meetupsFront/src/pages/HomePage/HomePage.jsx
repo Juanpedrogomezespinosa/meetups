@@ -3,17 +3,15 @@ import PropTypes from "prop-types";
 import CreateMeetupForm from "../../forms/CreateMeetupForm/CreateMeetupForm";
 import { useMeetup } from "../../hooks/useMeetup";
 import { AuthContext } from "../../contexts/AuthContext";
-import FilterMeetupByIdForm from "../../forms/FilterMeetupByIdForm/FilterMeetupByIdForm";
 import FilterByCityAndThemeForm from "../../forms/FilterByCityAndThemeForm/FilterByCityAndThemeForm";
-// import MeetupDetails from "../../components/MeetupsDetails/MeetupsDetails";
 import { getToken } from "../../utils/getToken";
 
 import "./HomePage.css";
 
 const HomePage = () => {
   const { authUser } = useContext(AuthContext);
-  const { meetups, addMeetup, setSearchParams, loading } = useMeetup();
-  const [formattedMeetup, setFormattedMeetup] = useState(null);
+  const { meetups, addMeetup, loading } = useMeetup();
+  const [formattedMeetup] = useState(null);
   const [filteredMeetups, setFilteredMeetups] = useState(null);
   const [attendeesCounts, setAttendeesCount] = useState({});
   const [successMessage, setSuccessMessage] = useState(null);
@@ -31,30 +29,6 @@ const HomePage = () => {
       setAttendeesCount(storedCounts);
     }
   }, []);
-
-  const handleMeetupDetails = async (meetupId) => {
-    fetch(`http://localhost:3070/meetups/${meetupId}`)
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          console.error("Error al buscar meetups filtradas");
-          return [];
-        }
-      })
-      .then((data) => {
-        let meetUp = data.data;
-        const meetupsWithImageUrl = {
-          ...meetUp,
-          imageUrl: `http://localhost:3070/${meetUp.photo_url}`,
-        };
-
-        setFormattedMeetup(meetupsWithImageUrl);
-      })
-      .catch((error) => {
-        console.error("Error de red al buscar meetups filtradas", error);
-      });
-  };
 
   const handleMeetupsFiltered = (city, theme) => {
     fetch(`http://localhost:3070/meetups/filter?city=${city}&theme=${theme}`)
@@ -132,7 +106,7 @@ const HomePage = () => {
       const response = await fetch(
         `http://localhost:3070/meetups/${meetupId}/leave`,
         {
-          method: "POST",
+          method: "DELETE",
           headers: {
             "Content-Type": "application/json",
             Authorization: token,
@@ -182,12 +156,6 @@ const HomePage = () => {
     <main>
       <div className="contenedor-formularios">
         <div className="divs-formularios">
-          <FilterMeetupByIdForm
-            className="filter-meetup-form"
-            setSearchParams={setSearchParams}
-            onMeetupDetails={handleMeetupDetails}
-            loading={loading}
-          />
           <FilterByCityAndThemeForm
             className="filter-city-theme-form"
             onMeetupsFiltered={handleMeetupsFiltered}
@@ -199,11 +167,7 @@ const HomePage = () => {
             className="boton-crear"
             onClick={handleToggleCreateMeetupForm}
           >
-            <img
-              src="./src/assets/crear.png"
-              alt="Crear Meetup"
-              style={{ width: "20px", height: "20px" }}
-            />
+            Crear Meetup
           </button>
         )}
       </div>
@@ -299,7 +263,6 @@ const HomePage = () => {
         {filteredMeetups && filteredMeetups.length > 0 ? (
           <div className="filter-city-theme-form">
             <ul className="meetups-list">
-              <h2>Meetups filtradas por ciudad y tema: </h2>
               {filteredMeetups.map((meetup) => (
                 <li className="tarjeta-id" key={meetup.id}>
                   {meetup.imageUrl ? (
