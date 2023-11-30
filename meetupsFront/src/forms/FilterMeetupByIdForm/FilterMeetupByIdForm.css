@@ -2,13 +2,9 @@
   display: inline-block;
   align-items: center;
   min-height: 20px;
-  padding: 10px;
+  padding: 20px;
   border-radius: 10px;
-  margin: 20px 0;
   vertical-align: middle;
-
-  max-width: 100%;
-  width: 100%;
 }
 
 .meetups-list {
@@ -25,7 +21,7 @@
 }
 
 .tarjeta-id {
-  /* width: calc(33.33% - 1rem); */
+  width: unset !important;
   max-width: 350px;
   margin-bottom: 1.5rem;
   display: flex;
@@ -68,7 +64,7 @@ p.filter-id-description {
   border-radius: 5px;
   font-size: 16px;
   vertical-align: middle;
-  width: 35%;
+  width: 240px;
 }
 
 /* Estilo para el botón de buscar en FilterMeetupByIdForm */
@@ -107,36 +103,3 @@ li.meetups-list {
   flex-direction: column;
   text-align: center;
 }
-
-/* .meetups-list li {
-} */
-
-/* li.meetups-list h3 {
-  font-size: 20px;
-  margin-bottom: 10px;
-  text-align: left;
-}
-
-li.meetups-list p {
-  font-size: 16px;
-  margin: 10px 0;
-}
-
-li.meetups-list img {
-  max-width: 62%;
-  max-height: 33.33%;
-}
-
-img.meetups-image {
-  height: 33.33%;
-}
-
-li.meetups-list p {
-  font-size: 16px;
-  margin: 10px 0;
-  text-align: left;
-}
-
-.filter-id-description {
-  max-width: 60%;
-} */

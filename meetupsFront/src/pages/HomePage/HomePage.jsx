@@ -5,7 +5,7 @@ import { useMeetup } from "../../hooks/useMeetup";
 import { AuthContext } from "../../contexts/AuthContext";
 import FilterMeetupByIdForm from "../../forms/FilterMeetupByIdForm/FilterMeetupByIdForm";
 import FilterByCityAndThemeForm from "../../forms/FilterByCityAndThemeForm/FilterByCityAndThemeForm";
-import MeetupDetails from "../../components/MeetupsDetails/MeetupsDetails";
+// import MeetupDetails from "../../components/MeetupsDetails/MeetupsDetails";
 import { getToken } from "../../utils/getToken";
 
 import "./HomePage.css";
@@ -13,10 +13,11 @@ import "./HomePage.css";
 const HomePage = () => {
   const { authUser } = useContext(AuthContext);
   const { meetups, addMeetup, setSearchParams, loading } = useMeetup();
-  const [meetupDetails, setMeetupDetails] = useState(null);
+  const [formattedMeetup, setFormattedMeetup] = useState(null);
   const [filteredMeetups, setFilteredMeetups] = useState(null);
   const [attendeesCounts, setAttendeesCount] = useState({});
   const [successMessage, setSuccessMessage] = useState(null);
+  const [meetupMessageId, setMeetupMessageId] = useState(null);
   const [isCreateMeetupFormVisible, setCreateMeetupFormVisibility] =
     useState(false);
 
@@ -31,10 +32,28 @@ const HomePage = () => {
     }
   }, []);
 
-  const handleMeetupDetails = () => {
-    if (meetupDetails) {
-      setMeetupDetails(meetupDetails);
-    }
+  const handleMeetupDetails = async (meetupId) => {
+    fetch(`http://localhost:3070/meetups/${meetupId}`)
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          console.error("Error al buscar meetups filtradas");
+          return [];
+        }
+      })
+      .then((data) => {
+        let meetUp = data.data;
+        const meetupsWithImageUrl = {
+          ...meetUp,
+          imageUrl: `http://localhost:3070/${meetUp.photo_url}`,
+        };
+
+        setFormattedMeetup(meetupsWithImageUrl);
+      })
+      .catch((error) => {
+        console.error("Error de red al buscar meetups filtradas", error);
+      });
   };
 
   const handleMeetupsFiltered = (city, theme) => {
@@ -80,7 +99,10 @@ const HomePage = () => {
       const data = await response.json();
 
       if (data.statusCode === 200) {
-        showSuccessMessage("Te has inscrito en la meetup correctamente");
+        showSuccessMessage(
+          "Te has inscrito en la meetup correctamente",
+          meetupId
+        );
 
         setAttendeesCount((prevCounts) => ({
           ...prevCounts,
@@ -94,9 +116,9 @@ const HomePage = () => {
         localStorage.setItem("attendeesCounts", JSON.stringify(updatedCounts));
       } else {
         if (data.message === "Already joined") {
-          showSuccessMessage("Ya estás inscrito en esta meetup");
+          showSuccessMessage("Ya estás inscrito en esta meetup", meetupId);
         } else {
-          showSuccessMessage("Ya estás inscrito en esta meetup");
+          showSuccessMessage("Ya estás inscrito en esta meetup", meetupId);
         }
       }
     } catch (error) {
@@ -125,7 +147,10 @@ const HomePage = () => {
       const data = await response.json();
 
       if (data.status === "ok") {
-        showSuccessMessage("Te has dado de baja de la meetup correctamente");
+        showSuccessMessage(
+          "Te has dado de baja de la meetup correctamente",
+          meetupId
+        );
 
         setAttendeesCount((prevCounts) => ({
           ...prevCounts,
@@ -133,9 +158,9 @@ const HomePage = () => {
         }));
       } else {
         if (data.message === "Not joined") {
-          showSuccessMessage("No estás inscrito en esta meetup");
+          showSuccessMessage("No estás inscrito en esta meetup", meetupId);
         } else {
-          showSuccessMessage("No estás inscrito en esta meetup");
+          showSuccessMessage("No estás inscrito en esta meetup", meetupId);
         }
       }
     } catch (error) {
@@ -143,56 +168,133 @@ const HomePage = () => {
     }
   };
 
-  const showSuccessMessage = (message) => {
+  const showSuccessMessage = (message, meetUpId) => {
     setSuccessMessage(message);
+    setMeetupMessageId(meetUpId);
 
     setTimeout(() => {
       setSuccessMessage(null);
+      setMeetupMessageId(null);
     }, 3000);
   };
 
   return (
     <main>
-      {successMessage && (
-        <div className="success-message">{successMessage}</div>
-      )}
-      {authUser && (
-        <button onClick={handleToggleCreateMeetupForm}>
-          <img
-            src="./src/assets/crear.png"
-            alt="Crear Meetup"
-            style={{ width: "20px", height: "20px" }}
-          />
-        </button>
-      )}
       <div className="prueba">
-        <FilterMeetupByIdForm
-          className="filter-meetup-form"
-          setSearchParams={setSearchParams}
-          onMeetupDetails={handleMeetupDetails}
-          loading={loading}
-        />
-        <FilterByCityAndThemeForm
-          className="filter-city-theme-form"
-          onMeetupsFiltered={handleMeetupsFiltered}
-          loading={loading}
-        />
+        <div className="divs-formularios">
+          <FilterMeetupByIdForm
+            className="filter-meetup-form"
+            setSearchParams={setSearchParams}
+            onMeetupDetails={handleMeetupDetails}
+            loading={loading}
+          />
+          <FilterByCityAndThemeForm
+            className="filter-city-theme-form"
+            onMeetupsFiltered={handleMeetupsFiltered}
+            loading={loading}
+          />
+        </div>
+        {authUser && (
+          <button
+            className="boton-crear"
+            onClick={handleToggleCreateMeetupForm}
+          >
+            <img
+              src="./src/assets/crear.png"
+              alt="Crear Meetup"
+              style={{ width: "20px", height: "20px" }}
+            />
+          </button>
+        )}
       </div>
 
       {isCreateMeetupFormVisible && (
-        <CreateMeetupForm onMeetupCreated={addMeetup} />
+        <CreateMeetupForm
+          onMeetupCreated={addMeetup}
+          onClose={handleToggleCreateMeetupForm}
+        />
       )}
 
-      {meetupDetails ? (
-        <MeetupDetails
-          meetup={meetupDetails}
-          user={authUser}
-          onSignUp={onSignUp}
-          onUnsubscribe={onUnsubscribe}
-        />
-      ) : null}
-
-      <div className="001">
+      <div className="container-filtrados">
+        {formattedMeetup && (
+          <div className="filtered-id-meetup-container">
+            <div className="filter-id-img">
+              {formattedMeetup.imageUrl && (
+                <img
+                  src={formattedMeetup.imageUrl}
+                  alt="Imagen de la meetup"
+                  style={{ display: "none" }}
+                />
+              )}
+            </div>
+            <ul>
+              <h2>Meetups Filtradas por ID:</h2>
+              <li className="tarjeta-id" key={formattedMeetup.id}>
+                {formattedMeetup.photo_url && (
+                  <img
+                    src={`http://localhost:3070/${formattedMeetup.photo_url}`}
+                    alt="Imagen del meetup"
+                    className="meetup-image"
+                  />
+                )}
+                <h3>{formattedMeetup.title}</h3>
+                <p className="filter-id-description">
+                  {formattedMeetup.description}
+                </p>
+                <div className="datos-container-id">
+                  <p className="datos-meetups">
+                    {" "}
+                    <img
+                      src="./src/assets/tema.png"
+                      alt="icono tema"
+                      style={{ width: "40px", height: "40px" }}
+                    />{" "}
+                    {formattedMeetup.theme}
+                  </p>
+                  <p className="datos-meetups">
+                    {" "}
+                    <img
+                      src="./src/assets/localizacion.png"
+                      alt="icono localización"
+                      style={{ width: "40px", height: "40px" }}
+                    />{" "}
+                    {formattedMeetup.location}
+                  </p>
+                  <p className="datos-meetups">
+                    <img
+                      src="./src/assets/fecha.png"
+                      alt="icono fecha"
+                      style={{ width: "40px", height: "40px" }}
+                    />{" "}
+                    {new Date(formattedMeetup.date).toLocaleDateString("en-GB")}
+                  </p>
+                  <p className="datos-meetups">
+                    <img
+                      src="./src/assets/hora.png"
+                      alt="icono hora"
+                      style={{ width: "40px", height: "40px" }}
+                    />{" "}
+                    {new Date(
+                      `1970-01-01T${formattedMeetup.time}`
+                    ).toLocaleTimeString("en-US", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      hour12: false,
+                    })}
+                  </p>
+                  <p className="datos-meetups">
+                    <img
+                      src="./src/assets/asistentes.png"
+                      alt="icono asistentes"
+                      style={{ width: "40px", height: "40px" }}
+                    />{" "}
+                    {formattedMeetup.attendees || 0}
+                  </p>
+                </div>
+              </li>
+            </ul>
+          </div>
+        )}
         {filteredMeetups && filteredMeetups.length > 0 ? (
           <div className="filter-city-theme-form">
             <ul className="meetups-list">
@@ -336,7 +438,7 @@ const HomePage = () => {
                 </p>
               </div>
               {authUser && (
-                <div>
+                <div className="botonera">
                   <button onClick={() => onSignUp(meetup && meetup.id)}>
                     Inscribirse
                   </button>
@@ -344,6 +446,9 @@ const HomePage = () => {
                     Darse de baja
                   </button>
                 </div>
+              )}
+              {successMessage && meetupMessageId === meetup.id && (
+                <div className="success-message">{successMessage}</div>
               )}
             </li>
           ))

@@ -26,3 +26,8 @@ div.app {
 main {
   flex-grow: 1;
 }
+
+.imagen-boton {
+  filter: invert(99%) sepia(1%) saturate(220%) hue-rotate(24deg)
+    brightness(117%) contrast(100%);
+}

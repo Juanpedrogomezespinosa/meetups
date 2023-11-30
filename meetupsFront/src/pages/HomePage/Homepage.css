@@ -8,6 +8,10 @@ h2 {
   margin: 0;
 }
 
+.container-filtrados {
+  display: flex;
+}
+
 .meetups-list h2 {
   position: absolute;
   margin-top: -30px;
@@ -63,33 +67,30 @@ h2 {
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s;
-  /* margin-right: 80px; */
   margin: 10px;
-  margin-left: 38%;
 }
 
-/* .meetups-list > li button:last-child {
-  margin-right: 0;
-  margin-left: 80px;
-} */
+.botonera {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 
 .meetups-list > li button:hover {
   background-color: var(--color-rojo-oscuro);
 }
 
 .success-message {
-  position: -webkit-sticky;
-  position: sticky;
-  bottom: 0;
-  width: 20%;
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  left: 0;
+  width: max-content;
+  margin: 0 auto;
+  padding: 5px;
   background-color: var(--color-rojo-medio);
   color: white;
-  padding: 5px;
-  text-align: center;
-  z-index: 1;
-  top: 40%;
-  left: 40%;
-  transform: translateX(0%);
+  z-index: 10000;
   border-radius: 6px;
 }
 
@@ -103,7 +104,19 @@ h2 {
 }
 
 .prueba {
-  background-color: aquamarine;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+.boton-crear {
+  margin-right: 30px;
+}
+
+.divs-formularios {
+  display: flex;
+  justify-content: flex-start;
 }
 
 .datos-container-city-theme {

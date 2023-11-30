@@ -29,7 +29,8 @@ const FilterByCityAndThemeForm = ({ onMeetupsFiltered, loading }) => {
       />
       <button onClick={handleSearch} disabled={loading}>
         <img
-          src="./src/assets/buscar.png"
+          className="imagen-boton"
+          src="./src/assets/buscar.svg"
           alt="Crear Meetup"
           style={{ width: "20px", height: "20px" }}
         />

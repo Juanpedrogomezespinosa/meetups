@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { AuthContext } from "../../contexts/AuthContext";
 import "./CreateMeetupForm.css";
 
-const CreateMeetupForm = ({ onMeetupCreated }) => {
+const CreateMeetupForm = ({ onMeetupCreated, onClose }) => {
   const { authUser } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     title: "",
@@ -23,6 +23,10 @@ const CreateMeetupForm = ({ onMeetupCreated }) => {
   const handleImageChange = (e) => {
     const imageFile = e.target.files[0];
     setFormData({ ...formData, image: imageFile });
+  };
+
+  const handleClose = () => {
+    onClose();
   };
 
   const handleSubmit = async (e) => {
@@ -70,6 +74,8 @@ const CreateMeetupForm = ({ onMeetupCreated }) => {
       } catch (error) {
         console.error("Error al realizar la solicitud:", error);
       }
+
+      onClose();
     } else {
       console.log(
         "Por favor, selecciona una imagen antes de enviar el formulario."
@@ -79,75 +85,81 @@ const CreateMeetupForm = ({ onMeetupCreated }) => {
   };
 
   return (
-    <div className="create-meetup-container">
-      {authUser ? (
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="image">Imagen:</label>
-          <input
-            type="file"
-            id="image"
-            name="image"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-          <label htmlFor="title">Título:</label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            value={formData.title}
-            onChange={handleChange}
-          />
-          <label htmlFor="description">Descripción:</label>
-          <textarea
-            id="description"
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-          <label htmlFor="theme">Tema:</label>
-          <input
-            type="text"
-            id="theme"
-            name="theme"
-            value={formData.theme}
-            onChange={handleChange}
-          />
-          <label htmlFor="location">Ubicación:</label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-          />
-          <label htmlFor="date">Fecha:</label>
-          <input
-            type="date"
-            id="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-          />
-          <label htmlFor="time">Hora:</label>
-          <input
-            type="time"
-            id="time"
-            name="time"
-            value={formData.time}
-            onChange={handleChange}
-          />
-          <button type="submit">Crear Meetup</button>
-        </form>
-      ) : (
-        <p>Debes iniciar sesión para crear meetups.</p>
-      )}
+    <div className="full-container" onClick={handleClose}>
+      <div
+        className="create-meetup-container"
+        onClick={(e) => e.stopPropagation()}
+      >
+        {authUser ? (
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="image">Imagen:</label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              accept="image/*"
+              onChange={handleImageChange}
+            />
+            <label htmlFor="title">Título:</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              value={formData.title}
+              onChange={handleChange}
+            />
+            <label htmlFor="description">Descripción:</label>
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+            />
+            <label htmlFor="theme">Tema:</label>
+            <input
+              type="text"
+              id="theme"
+              name="theme"
+              value={formData.theme}
+              onChange={handleChange}
+            />
+            <label htmlFor="location">Ubicación:</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              value={formData.location}
+              onChange={handleChange}
+            />
+            <label htmlFor="date">Fecha:</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+            />
+            <label htmlFor="time">Hora:</label>
+            <input
+              type="time"
+              id="time"
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+            />
+            <button type="submit">Crear Meetup</button>
+          </form>
+        ) : (
+          <p>Debes iniciar sesión para crear meetups.</p>
+        )}
+      </div>
     </div>
   );
 };
 
 CreateMeetupForm.propTypes = {
   onMeetupCreated: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default CreateMeetupForm;
