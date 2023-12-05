@@ -5,7 +5,8 @@
   "main": "server.js",
   "scripts": {
     "initDb": "node ./db/initDb.js",
-    "dev": "nodemon ./server.js"
+    "dev": "nodemon ./server.js",
+    "build": "npm i"
   },
   "keywords": [],
   "author": "",
