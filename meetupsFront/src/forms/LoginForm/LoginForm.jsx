@@ -44,7 +44,7 @@ const LoginForm = ({ authLogin, loading }) => {
             className=" emoticon-btn"
             onClick={() => setShowPassword(!showPassword)}
           >
-            <span className="emoticon">{showPassword ? "🙉" : "🙈"}</span>
+            <span className="emoticon">{showPassword ? "🙈" : "🙉"}</span>
           </button>
         </div>
 

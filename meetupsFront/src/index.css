@@ -1,3 +1,7 @@
+/* Importación de la fuente */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
+/* Definición de la paleta de colores */
 :root {
   --color-negro: #0b090a;
   --color-semi-negro: #161a1d;
@@ -30,4 +34,9 @@ main {
 .imagen-boton {
   filter: invert(99%) sepia(1%) saturate(220%) hue-rotate(24deg)
     brightness(117%) contrast(100%);
+}
+
+/* Definición de la fuente para toda la aplicación */
+body {
+  font-family: "Lato", sans-serif;
 }
