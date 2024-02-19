@@ -1,6 +1,14 @@
+.login-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
 /* Estilo para el contenedor del formulario en LoginForm */
 .form-container {
   max-width: 400px;
+  min-width: 350px;
   margin: 20px auto;
   text-align: center;
   background-color: var(--color-gris-claro);
@@ -35,8 +43,17 @@
   font-size: 16px;
 }
 
+.form-container input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid var(--color-gris-medio);
+  border-radius: 5px;
+  font-size: 16px;
+}
 /* Estilo para el botón de inicio de sesión en LoginForm */
 .form-container button {
+  margin-top: 1rem;
   width: 100%;
   padding: 10px;
   background-color: var(--color-rojo-medio);
@@ -56,4 +73,36 @@
 /* Estilo de hover para los botones en LoginForm */
 .form-container button:hover {
   background-color: var(--color-rojo-oscuro);
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container input {
+  padding-right: 40px;
+}
+
+.form-container .emoticon-btn {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.form-container .emoticon-btn:hover {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+}
+
+.emoticon-btn {
+  position: absolute;
+  right: 10px;
+  bottom: 4px;
+  transform: translateY(-50%);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  width: auto;
+  max-width: fit-content;
 }

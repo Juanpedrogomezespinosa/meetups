@@ -7,38 +7,50 @@ import "./LoginForm.css";
 const LoginForm = ({ authLogin, loading }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <form
-      className="form-container"
-      onSubmit={(e) => {
-        e.preventDefault();
-        authLogin(email, password);
-      }}
-    >
-      <h2 className="form-title">Login:</h2>
-      <label htmlFor="email">Email: </label>
-      <input
-        type="email"
-        id="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
+    <div className="login-body">
+      <form
+        className="form-container"
+        onSubmit={(e) => {
+          e.preventDefault();
+          authLogin(email, password);
+        }}
+      >
+        <h2 className="form-title">Login:</h2>
+        <label htmlFor="email">Email: </label>
+        <input
+          type="email"
+          id="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
 
-      <label htmlFor="email">Contraseña: </label>
-      <input
-        type="password"
-        id="pass"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        minLength="4"
-        maxLength="100"
-        required
-      />
+        <label htmlFor="password">Contraseña: </label>
+        <div className="password-input-container">
+          <input
+            type={showPassword ? "text" : "password"}
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            minLength="4"
+            maxLength="100"
+            required
+          />
+          <button
+            type="button"
+            className=" emoticon-btn"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            <span className="emoticon">{showPassword ? "🙉" : "🙈"}</span>
+          </button>
+        </div>
 
-      <button disabled={loading}>Login</button>
-    </form>
+        <button disabled={loading}>Login</button>
+      </form>
+    </div>
   );
 };
 

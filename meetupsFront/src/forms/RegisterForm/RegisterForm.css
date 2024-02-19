@@ -1,3 +1,10 @@
+.register-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
 /* Estilo para el contenedor del formulario en RegisterForm */
 .register-form-container {
   max-width: 400px;
@@ -37,6 +44,7 @@
 
 /* Estilo para el botón de registro en RegisterForm */
 .register-form-container button {
+  margin-top: 1rem;
   width: 100%;
   padding: 10px;
   background-color: var(--color-rojo-medio);
