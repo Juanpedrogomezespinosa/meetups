@@ -8,8 +8,9 @@ const FilterByCityAndThemeForm = ({ onMeetupsFiltered, loading }) => {
   const [theme, setTheme] = useState("");
 
   const handleSearch = () => {
-    if (city && theme) {
-      onMeetupsFiltered(city, theme);
+    // Filtrar si al menos uno de los campos tiene contenido
+    if (city.trim() || theme.trim()) {
+      onMeetupsFiltered(city.trim(), theme.trim());
     }
   };
 

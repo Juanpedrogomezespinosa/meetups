@@ -139,10 +139,9 @@ h2 {
   cursor: pointer;
   transition: background-color 0.3s;
   width: 120px;
-  /* max-width: 120px; */
   height: 35px;
   max-height: 35px;
-  margin-left: -170px;
+  margin-left: -165px;
 }
 
 .boton-crear:hover {

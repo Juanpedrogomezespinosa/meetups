@@ -9,7 +9,7 @@ const filterMeetups = async (req, res, next) => {
 
     // Consulta para obtener meetups filtradas por ciudad y tema, con fecha posterior o igual a la fecha actual, ordenadas por fecha ascendente.
     const [meetups] = await pool.query(
-      "SELECT * FROM meetup WHERE location = ? AND theme = ? AND date >= CURDATE() ORDER BY date ASC",
+      "SELECT * FROM meetup WHERE location = ? OR theme = ? AND date >= CURDATE() ORDER BY date ASC",
       [city, theme]
     );
 
