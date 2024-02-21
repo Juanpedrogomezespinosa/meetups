@@ -182,7 +182,7 @@ h2 {
   margin-bottom: 10px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: left;
-  overflow: hidden;
+  /* overflow: hidden; */
   word-wrap: break-word;
 }
 
