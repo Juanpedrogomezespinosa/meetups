@@ -212,7 +212,7 @@ const HomePage = () => {
                     <img
                       src="./src/assets/tema.png"
                       alt="icono tema"
-                      style={{ width: "40px", height: "40px" }}
+                      style={{ width: "25px", height: "25px" }}
                     />{" "}
                     {formattedMeetup.theme}
                   </p>
@@ -221,7 +221,7 @@ const HomePage = () => {
                     <img
                       src="./src/assets/localizacion.png"
                       alt="icono localización"
-                      style={{ width: "40px", height: "40px" }}
+                      style={{ width: "25px", height: "25px" }}
                     />{" "}
                     {formattedMeetup.location}
                   </p>
@@ -229,7 +229,7 @@ const HomePage = () => {
                     <img
                       src="./src/assets/fecha.png"
                       alt="icono fecha"
-                      style={{ width: "40px", height: "40px" }}
+                      style={{ width: "25px", height: "25px" }}
                     />{" "}
                     {new Date(formattedMeetup.date).toLocaleDateString("en-GB")}
                   </p>
@@ -237,7 +237,7 @@ const HomePage = () => {
                     <img
                       src="./src/assets/hora.png"
                       alt="icono hora"
-                      style={{ width: "40px", height: "40px" }}
+                      style={{ width: "25px", height: "25px" }}
                     />{" "}
                     {new Date(
                       `1970-01-01T${formattedMeetup.time}`
@@ -251,9 +251,10 @@ const HomePage = () => {
                     <img
                       src="./src/assets/asistentes.png"
                       alt="icono asistentes"
-                      style={{ width: "40px", height: "40px" }}
+                      style={{ width: "25px", height: "25px" }}
                     />{" "}
-                    {formattedMeetup.attendees || 0}
+                    {(attendeesCounts && attendeesCounts[formattedMeetup.id]) ||
+                      0}
                   </p>
                 </div>
               </li>
@@ -283,7 +284,7 @@ const HomePage = () => {
                       <img
                         src="./src/assets/tema.png"
                         alt="icono tema"
-                        style={{ width: "40px", height: "40px" }}
+                        style={{ width: "25px", height: "25px" }}
                       />{" "}
                       {meetup.theme}
                     </p>
@@ -291,7 +292,7 @@ const HomePage = () => {
                       <img
                         src="./src/assets/localizacion.png"
                         alt="icono localización"
-                        style={{ width: "40px", height: "40px" }}
+                        style={{ width: "25px", height: "25px" }}
                       />{" "}
                       {meetup.location}
                     </p>
@@ -299,7 +300,7 @@ const HomePage = () => {
                       <img
                         src="./src/assets/fecha.png"
                         alt="icono fecha"
-                        style={{ width: "40px", height: "40px" }}
+                        style={{ width: "25px", height: "25px" }}
                       />{" "}
                       {new Date(meetup.date).toLocaleDateString("en-GB")}
                     </p>
@@ -307,7 +308,7 @@ const HomePage = () => {
                       <img
                         src="./src/assets/hora.png"
                         alt="icono hora"
-                        style={{ width: "40px", height: "40px" }}
+                        style={{ width: "25px", height: "25px" }}
                       />{" "}
                       {new Date(`1970-01-01T${meetup.time}`).toLocaleTimeString(
                         "en-US",
@@ -322,10 +323,10 @@ const HomePage = () => {
                       <img
                         src="./src/assets/asistentes.png"
                         alt="icono asistentes"
-                        style={{ width: "40px", height: "40px" }}
+                        style={{ width: "25px", height: "25px" }}
                       />{" "}
-                      {meetup.attendees_count || 0}
-                    </p>{" "}
+                      {meetup.attendees || 0} {/* Aquí se hace el cambio */}
+                    </p>
                   </div>
                 </li>
               ))}
@@ -358,7 +359,7 @@ const HomePage = () => {
                   <img
                     src="./src/assets/tema.png"
                     alt="icono tema"
-                    style={{ width: "40px", height: "40px" }}
+                    style={{ width: "25px", height: "25px" }}
                   />{" "}
                   {meetup && meetup.theme}
                 </p>
@@ -366,7 +367,7 @@ const HomePage = () => {
                   <img
                     src="./src/assets/localizacion.png"
                     alt="icono localización"
-                    style={{ width: "40px", height: "40px" }}
+                    style={{ width: "25px", height: "25px" }}
                   />{" "}
                   {meetup && meetup.location}
                 </p>
@@ -374,7 +375,7 @@ const HomePage = () => {
                   <img
                     src="./src/assets/fecha.png"
                     alt="icono fecha"
-                    style={{ width: "40px", height: "40px" }}
+                    style={{ width: "25px", height: "25px" }}
                   />{" "}
                   {new Date(meetup && meetup.date).toLocaleDateString("en-GB")}
                 </p>
@@ -382,7 +383,7 @@ const HomePage = () => {
                   <img
                     src="./src/assets/hora.png"
                     alt="icono hora"
-                    style={{ width: "40px", height: "40px" }}
+                    style={{ width: "25px", height: "25px" }}
                   />{" "}
                   {new Date(
                     `1970-01-01T${meetup && meetup.time}`
@@ -396,9 +397,10 @@ const HomePage = () => {
                   <img
                     src="./src/assets/asistentes.png"
                     alt="icono asistentes"
-                    style={{ width: "40px", height: "40px" }}
+                    style={{ width: "25px", height: "25px" }}
                   />{" "}
-                  {attendeesCounts[meetup && meetup.id] || 0}
+                  {(attendeesCounts && attendeesCounts[meetup && meetup.id]) ||
+                    0}
                 </p>
               </div>
               {authUser && (
